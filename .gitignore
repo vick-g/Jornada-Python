@@ -1,0 +1,11 @@
+# Ignorar configurações do editor
+.vscode/
+
+# Arquivos do sistema operacional
+Thumbs.db
+.DS_Store
+
+# Ignorar arquivos de cache e configuração
+.cache/
+.config/
+.copilot/
