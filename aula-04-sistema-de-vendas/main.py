@@ -29,6 +29,8 @@ tabela_vendas = pd.read_csv("aula-04-sistema-de-vendas/vendas.csv")
 st.write("# Sistema de Vendas 💰")
 
 # seção de cadastro de vendas
+
+
 st.write("## Cadastrar Vendas")
 data = st.date_input("Data da Venda")
 vendedor = st.selectbox("Vendedor", ["Victor", "Pedro", "João"], index=None, placeholder="Selecione o vendedor")
@@ -46,6 +48,11 @@ st.write("## Dashboard")
 # Card/Metrica de vendas totais
 faturamento = tabela_vendas["valor"].sum()
 st.metric("Faturamento Total", f"R$ {faturamento}")
+
 # Gráfico de barras para vendas por vendedor
+grafico_vendas = px.bar(tabela_vendas, x="vendedor", y="valor", color="produto", title="Vendas por Vendedor")
+st.plotly_chart(grafico_vendas)
 
 # Gráfico de pizza para vendas por produto
+grafico_produtos = px.pie(tabela_vendas, values="valor", names="produto", title="Vendas por Produto")
+st.plotly_chart(grafico_produtos)
