@@ -29,15 +29,24 @@ tabela_vendas = pd.read_csv("aula-04-sistema-de-vendas/vendas.csv")
 st.write("# Sistema de Vendas 💰")
 
 # seção de cadastro de vendas
+st.sidebar.write("## Cadastrar Vendas")
+data = st.sidebar.date_input("Data da Venda")
+vendedor = st.sidebar.selectbox("Vendedor", ["Victor", "Pedro", "João"], index=None, placeholder="Selecione o vendedor")
+produto = st.sidebar.selectbox("Produto", ["Notebook", "Celular", "Tablet"], index=None, placeholder="Selecione o produto")
+quantidade = st.sidebar.number_input("Quantidade", step=1)
+valor = st.sidebar.number_input("Valor Unitário", step=0.01)
+Botao_cadastrar = st.sidebar.button("Cadastrar Venda")
 
-
-st.write("## Cadastrar Vendas")
-data = st.date_input("Data da Venda")
-vendedor = st.selectbox("Vendedor", ["Victor", "Pedro", "João"], index=None, placeholder="Selecione o vendedor")
-produto = st.selectbox("Produto", ["Notebook", "Celular", "Tablet"], index=None, placeholder="Selecione o produto")
-quantidade = st.number_input("Quantidade", step=1)
-valor = st.number_input("Valor Unitário", step=0.01)
-Botao_cadastrar = st.button("Cadastrar Venda")
+# logica do botão cadastrar venda
+if Botao_cadastrar:
+    if data and vendedor and produto and quantidade > 0 and valor > 0:
+        nova_venda = [str(data), vendedor, produto, quantidade, valor]
+        ultima_linha = len(tabela_vendas)
+        tabela_vendas.loc[ultima_linha] = nova_venda
+        tabela_vendas.to_csv("aula-04-sistema-de-vendas/vendas.csv", index=False)
+        st.sidebar.success("Venda cadastrada com sucesso!")
+    else:
+        st.sidebar.error("Por favor, preencha todos os campos corretamente.")
 
 # seção de vendas cadastradas
 st.write("## Vendass Cadastradas")
