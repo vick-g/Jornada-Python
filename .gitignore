@@ -9,3 +9,10 @@ Thumbs.db
 .cache/
 .config/
 .copilot/
+
+# Python / Ambientes virtuais e cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
